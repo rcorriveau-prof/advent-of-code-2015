@@ -27,16 +27,16 @@ def do_solution_1() -> int:
     array_2d = np.zeros((1000, 1000))
     for actions, coord1, coord2 in tp_actions:
         for rangee in range(coord1[1], coord2[1] + 1):
-                for colonne in range(coord1[0], coord2[0] + 1):
-                    if actions == "on":  # Mets à 1
-                        array_2d[colonne][rangee] = 1
-                    elif actions == "off":  # Mets à 0
+            for colonne in range(coord1[0], coord2[0] + 1):
+                if actions == "on":  # Mets à 1
+                    array_2d[colonne][rangee] = 1
+                elif actions == "off":  # Mets à 0
+                    array_2d[colonne][rangee] = 0
+                else:  # Change l'état : 0 -> 1, 1 -> 0
+                    if array_2d[colonne][rangee] == 1:
                         array_2d[colonne][rangee] = 0
-                    else:  # Change l'état : 0 -> 1, 1 -> 0
-                        if array_2d[colonne][rangee] == 1:
-                            array_2d[colonne][rangee] = 0
-                        else:
-                            array_2d[colonne][rangee] = 1
+                    else:
+                        array_2d[colonne][rangee] = 1
 
     # Compter les "1", lumières allumées
     return np.count_nonzero(array_2d)
