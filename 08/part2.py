@@ -5,19 +5,17 @@ def fn_lire_data(nom_data: str) -> int:
     # Longueur totale
     espace_inital = len(str_input.replace("\n", ""))
 
-    # Combien il y a de \", on va ajouter 2 au total pour chaque occurrence
-    ajouter_bs_guill = str_input.count(r'\"') * 2
+    # Nb lignes, plus 4 pour chaque ligne à cause des "" de début et fin
+    nb_ligne = len([ligne for ligne in str_input.split("\n")])
 
-    # Combien il y a de \\, on va ajouter 2 au total pour chaque occurrence
-    ajouter_bs_bs = str_input.count(r'\\') * 1
+    # Combien il y a de " en milieu de ligne, ils comptent pour 1
+    nb_guill = str_input.count(r'"')
+    nb_guill = nb_guill - (nb_ligne * 2)
 
-    # Combien il y a de \x, on va ajouter 1 au total pour chaque occurrence
-    ajouter_bs_x = str_input.count(r'\x')
+    # Combien il y a de \, on ajoute 1 pour chacun
+    nb_bs = str_input.count('\\')
 
-    # Combien il y a de lignes, on ajoute 4 par ligne à cause des "" de début et fin
-    ajouter_lignes = len([ligne for ligne in str_input.split("\n")]) * 4
-
-    return ajouter_lignes + ajouter_bs_guill + ajouter_bs_x + ajouter_bs_bs
+    return nb_bs + nb_guill + (nb_ligne * 4)
 
 
 def do_solution_1() -> int:
